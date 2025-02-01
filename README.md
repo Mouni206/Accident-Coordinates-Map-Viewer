@@ -1,0 +1,1 @@
+The Accident Detection System is designed to identify accident locations using GPS coordinates and display them on an interactive map. This project enables users to enter latitude and longitude values, which are then plotted on Google Maps, helping authorities and users quickly locate the accident site. 
