@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #map {
+            height: 500px;
+            width: 90%;
+            max-width: 800px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        let map;
+
+        function initMap(lat = 28.6139, lng = 77.2090) {  // Default to New Delhi
+            const location = { lat: lat, lng: lng };
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 10,
+                center: location,
+            });
+            new google.maps.Marker({
+                position: location,
+                map: map,
+            });
+        }
+
+        function submitCoordinates(event) {
+            event.preventDefault();  // Prevent form submission reload
+            const lat = parseFloat(document.getElementById("latitude").value);
+            const lng = parseFloat(document.getElementById("longitude").value); 
+            if (!isNaN(lat) && !isNaN(lng)) {
+                initMap(lat, lng);
+            } else {
+                alert("Please enter valid latitude and longitude values.");
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Map Viewer</h1>
+
+    <div class="container">
+        <form id="template_form" onsubmit="submitCoordinates(event)">
+            <div class="form-group">
+                <label for="latitude">Latitude:</label>
+                <input type="text" id="latitude" placeholder="Enter Latitude">
+            </div>
+            
+            <div class="form-group">
+                <label for="longitude">Longitude:</label>
+                <input type="text" id="longitude" placeholder="Enter Longitude">
+            </div>
+            
+            <div class="form-group">
+                <label for="Vechicle_no">Vehicle Number:</label>
+                <input type="text" id="Vechicle_no" placeholder="Enter Vehicle Number">
+            </div>
+            
+            <div class="form-group">
+                <label for="Description">Description:</label>
+                <input type="text" id="Description" placeholder="Enter Description">
+            </div>
+
+            <button type="submit">Show Location</button>
+        </form>
+    </div>
+
+    <div id="map"></div>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzdc_k93jL7NPhecRBU8E7FXYCZaxpqvI&callback=initMap">
+    </script>
+
+</body>
+</html>
